@@ -1,0 +1,30 @@
+# 2nd iteration with notes
+
+CXX := clang++
+CXXFLAGS := -std=c++20 -g -pedantic -Wall -Wextra -O3
+CPPFLAGS := -Isrc
+SRCS := src/main.cpp \
+	src/Memory/Arena.cpp \
+	src/DQ/Dequeue.cpp
+
+# To avoid listing loads of source files use $(wildcard src/*.cpp) $(wildcard src/Memory/*.cpp) etc.
+# Or better yet: $(shell find src -name '*.cpp') for all .cpp files in src/
+
+OBJS := $(SRCS:.cpp=.o)
+
+TARGET=deque_test
+
+# $^ means "all prerequisites"
+$(TARGET) : $(OBJS)
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $^ -o $@
+#	$(CXX) $(CXXFLAGS) $(OBJS) -o $(TARGET)
+
+
+# $< means "the first prerequisite"
+# $@ means "the target being built"
+%.o : %.cpp
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $< -o $@
+	# For any requested obj file, compile the matching src file into that object file
+
+clean:
+	rm -f $(OBJS) $(TARGET)

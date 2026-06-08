@@ -1,0 +1,19 @@
+# Even simpler
+
+CXX := clang++
+CXXFLAGS := -std=c++20 -g -pedantic -Wall -Wextra
+CPPFLAGS := -Isrc
+
+BUILD_DIR := build
+
+SRCS := $(shell find src -name '*.cpp')
+OBJS := $(SRCS:src/%.cpp=$(BUILD_DIR)/%.o)
+TARGET := deque_test
+$(TARGET) : $(OBJS)
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -o $(TARGET)
+
+%.o : %.cpp
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $< -o $@
+
+clean:
+	rm -f $(OBJS) $(TARGET)

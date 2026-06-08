@@ -1,0 +1,37 @@
+# Simple, super explicit. Does not scale well
+
+CXX := clang++
+CXXFLAGS := -std=c++20 -g -pedantic -Wall -Wextra
+
+TARGET := deque_test
+
+#SRCS := main.cpp \
+#	Memory/Arena.cpp \
+#	DQ/Dequeue.cpp
+
+# OBJS := $(SRCS:.cpp=.o)
+
+OBJS := main.o \
+	Memory/Arena.o \
+	DQ/DeQueue.o
+
+SRCS := $(OBJS:.cpp=.0)
+
+$(TARGET): $(OBJS)
+	$(CXX) $(CXXFLAGS) $(OBJS) -o $(TARGET)
+
+
+# The -c flag means "compile this source file into an object file, but do not link yet
+main.o: main.cpp Memory/Arena.h DQ/Dequeue.h
+	$(CXX) $(CXXFLAGS) -c main.cpp -o main.o
+
+Memory/Arena.o: Memory/Arena.cpp Memory/Arena.h
+	$(CXX) $(CXXFLAGS) -c Memory/Arena.cpp -o Memory/Arena.o
+
+DQ/Dequeue.o: DQ/Dequeue.cpp DQ/Dequeue.h
+	$(CXX) $(CXXFLAGS) -c DQ/Dequeue.cpp -o DQ/Dequeue.o
+
+clean: 
+	rm -f $(OBJS) $(TARGET)
+
+	
