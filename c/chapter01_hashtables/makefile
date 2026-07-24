@@ -2,7 +2,7 @@ CC := gcc
 # Sanitizers generally need to be enabled during both compilation and linking
 CFLAGS := -Wall -Wshadow -Wpedantic -g3 -O0 -fsanitize=address,undefined,bounds
 LDFLAGS := -fsanitize=address,undefined,bounds
-OBJ := snowflakes_1.o
+OBJ := snowflakes_2.o
 TARGET := snow
 
 # "Explicit Recipe"

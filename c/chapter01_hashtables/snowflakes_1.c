@@ -74,8 +74,9 @@ int main(void) {
 	for (i = 0; i < n; i++) {
 	
 		for (j = 0; j < 6; j++) {
-			printf("[%d, %d]: ");	
-			scanf("%d", i, j, &snowflakes[i][j]);
+			printf("Enter Side Length:" );
+			scanf("%d", &snow1[i][j]);
+			printf("[%d, %d]\n", i, j);	
 		}
 	}
 
