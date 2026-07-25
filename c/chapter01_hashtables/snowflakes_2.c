@@ -2,6 +2,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/*
+ * Simple Hashtable to compare snowflakes.
+ * Bucketed by the sum of their 6 lengths
+ */
+
 #define MAX_SNOWFLAKES 100000
 
 typedef struct snowflake_node {
@@ -9,9 +14,8 @@ typedef struct snowflake_node {
 	struct snowflake_node* next;
 } snowflake_node;
 
-/**/
+int  code(int snowflake[]);	// Our hash function
 
-int  code(int snowflake[]);
 void identify_identical(snowflake_node *snowflakes[]);
 int  are_identical(int snow1[], int snow2[]);
 int  identical_right(int snow1[], int snow2[], int start);
@@ -52,6 +56,8 @@ int main(void) {
 		
 	}
 
+	identify_identical(snowflakes);
+
 	return 0;
 }
 
@@ -68,10 +74,26 @@ void identify_identical(snowflake_node *snowflakes[]) {
 
 	for (i = 0; i < MAX_SNOWFLAKES; i++) {
 		node1 = snowflakes[i];
-		if (node1 != NULL) {
-			
+		while (node1 != NULL) {
+
+			node2 = node1->next;
+
+			while (node2 != NULL) {
+				if (are_identical(node1->snowflake, node2->snowflake)) {
+					printf("Found identical...\n");
+					return;
+				}
+				node2 = node2->next;
+			}
+
+			node1 = node1->next;
+
 		}
+
 	}
+
+	printf("No identical snowflakes in this bucket!\n");
+	return;
 }
 
 int are_identical(int snow1[], int snow2[]) {
