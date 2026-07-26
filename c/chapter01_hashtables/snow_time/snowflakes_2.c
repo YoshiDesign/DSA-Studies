@@ -39,7 +39,8 @@ int main(void) {
 
 	for (i = 0; i < n; i++) {
 	
-		// Weather allocation
+		// Weather allocation - 
+		// TODO: Free the elements of the linked list. The hashtable itself doesn't need to be freed. It's static storage
 		snow = malloc(sizeof(snowflake_node));
 		if (snow == NULL) {
 			fprintf(stderr, "err 1\n");
