@@ -48,6 +48,10 @@ int main(void) {
     // Greeting
     time_t now = time(NULL);
     struct tm *local = localtime(&now);
+    if (local == NULL) {
+        printf("Failed to get time.\n");
+        return 0;
+    }
     char buffer[64];
     strftime(buffer, 
         sizeof(buffer),
