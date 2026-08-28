@@ -2,6 +2,8 @@
 #include <iostream>
 #include <cstdint>
 #include <cassert>
+#include <atomic>
+#include "../Types.h"
 
 #include "Memory/Arena.h"
 
@@ -16,11 +18,9 @@ class WSDeque {
 public:
 	WSDeque(size_t capacity, Arena* arena) : _capacity(capacity), mask(_capacity - 1) {
 		assert((_capacity & mask) == 0 && "DeQueue capacity must be a pwr of 2");
-		buffer = ArenaAlloc(arena, capacity);
+		buffer = (T*)ArenaAlloc(arena, capacity);
 	}
-	~WSDeque() {
-		DestroyArena(arena);
-	}
+	~WSDeque() {}
 
 	bool push_bottom(T item);	// owner
 	bool pop_bottom(T* item);	// owner
@@ -36,5 +36,5 @@ private:
 	alignas(std::hardware_destructive_interference_size) 
 		std::atomic<uint64_t> tail{ 0 };
 
-	T* buffer{ };
+	T* buffer = nullptr;
 };

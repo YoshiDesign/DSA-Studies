@@ -15,8 +15,10 @@ int minTimeDiff(std::string times[], size_t len){
     std::vector<int> data;
 
     for (size_t i = 0; i < len; i++) {
+        // Position of delim
         const std::size_t colon = times[i].find(":");
 
+        // Substring to/from delim. convert to int
         int hr = std::stoi(times[i].substr(0, colon));
         int min = std::stoi(times[i].substr(colon + 1));
 
@@ -24,6 +26,7 @@ int minTimeDiff(std::string times[], size_t len){
         data.push_back(total);
     }
 
+    // Sort ascending so we can compare reliably in linear time
     std::sort(data.begin(), data.end());
 
     for (size_t i = 1; i < data.size(); i++) {
@@ -35,6 +38,7 @@ int minTimeDiff(std::string times[], size_t len){
         }
     }
 
+    // take the midnight boundary delta
     wrapDelta = data[0] + WHOLE - data[data.size() - 1];
     if (wrapDelta < min) {
         min = wrapDelta;

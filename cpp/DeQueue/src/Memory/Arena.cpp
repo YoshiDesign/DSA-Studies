@@ -1,5 +1,6 @@
 #include "Arena.h"
 #include <cstddef>
+#include <stdlib.h>
 
 #ifdef _WIN32
 #include <windows.h>

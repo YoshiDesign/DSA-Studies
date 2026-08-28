@@ -7,6 +7,7 @@ import (
 	"strings"
 )
 
+// Best solution
 // We did not need to return to hourly bucketing to improve the performance.
 // Chronological structure provided implicit logical enhancements that carried performance.
 

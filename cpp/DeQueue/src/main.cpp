@@ -2,24 +2,6 @@
 #include "Memory/Arena.h"
 #include "DQ/Dequeue.h"
 
-enum class TerrainTaskKind {
-	Points = 1,
-	AllPoints,
-	Triangulation,
-	Mesh,
-};
-
-struct ChunkCoord {
-	int x, z;
-};
-
-struct TerrainTask {
-	TerrainTaskKind kind;
-	ChunkCoord coord;
-	uint64_t frameIndex;
-	uint64_t requestId;
-};
-
 const size_t MAX_TASKS = 65536;
 
 int main(void) {
@@ -31,6 +13,7 @@ int main(void) {
 	Arena dequeue_arena = *CreateArena(dq_arena_size);	// 100k tasks
 
 	WSDeque<TerrainTask> dq = WSDeque<TerrainTask>(MAX_TASKS, &dequeue_arena);
+	WSDeque<int> dq2 = WSDeque<int>(MAX_TASKS, &working_arena);
 
 	std::cout << "Done!" << std::endl;
 	return 0;

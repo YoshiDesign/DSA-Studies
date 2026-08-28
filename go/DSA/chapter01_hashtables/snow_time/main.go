@@ -152,28 +152,33 @@ func main() {
 	// Hashtable with preallocated 0-value indices
 	var hashtable = make([]*snowflake_node, MAX_SNOWFLAKES)
 
-	var n, i, j uint
+	var n, j uint
 	fmt.Printf("Num Snowflakes: ")
 	fmt.Scanf("%d", &n)
 
-	for i = uint(0); i < n; i++ {
+	for range n {
 
 		var snow snowflake_node
 
 		fmt.Println("Enter side lenghts...")
-		for j = uint(0); j < 6; j++ {
+		for j = range 6 {
 			fmt.Scanf("%d", &snow.snowflake[j])
 		}
 
 		// code := uint64(sumflake(snow.snowflake))
 		code := oaat(canonicalizeSnowflake(snow.snowflake))
 		code = code & uint64(MAX_SNOWFLAKES-1)
+
 		fmt.Printf("Hash: %d\n", code)
 		snow.next = hashtable[code]
 		hashtable[code] = &snow
 
 	}
 
+	/*
+	 * TODO : canonicalization implicitly takes care of
+	 * identical identification. We're doubling up on work.
+	 */
 	identify_identical(hashtable)
 
 	fmt.Print("Done!\n")
