@@ -7,7 +7,10 @@
 // #define hashsize(n) ((size_t) 1 << n)
 // #define hashmask(n) (hashsize(n) - 1)
 
-// Const to tell us that bytes won't be modified.
+// Just for reference
+// const void *p;        // pointer to const data
+// void *const p;        // const pointer to mutable data
+// const void *const p;  // const pointer to const data
 size_t oaat(const void* bytes, size_t len) {
 
     // effectively casting bytes to something indexable
