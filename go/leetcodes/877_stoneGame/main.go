@@ -72,9 +72,9 @@ func stoneGame(piles []int) bool {
 
 func main() {
 
-	input := [...]int{4, 11, 5, 3, 11, 5}
+	input := [...]int{4, 11, 5, 3, 11, 5} // [...] creates an array, this shortcut helps Go infer the length.
 
-	if stoneGame(input[:]) {
+	if stoneGame(input[:]) { // Then, using [:], we can convert the array to a slice, which is what the function expects.
 		fmt.Println("Alice Wins!")
 	} else {
 		fmt.Println("Bob Wins!")
